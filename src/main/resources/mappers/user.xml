@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adgile.repository.UserMapper">
+<!--    <insert id="create" parameterType="object">-->
+<!--        INSERT INTO user (type, user_type, user_id, name, manager, email, currency_type, invoice_email) VALUES (${type}, ${userType}, #{userId}, #{name}, #{manager}, #{email}, #{currencyType}, #{invoiceEmail});-->
+<!--    </insert>-->
+        <insert id="create" parameterType="object">
+            INSERT INTO user (type, user_type, user_id, name, manager, email, currency_type, invoice_email, created_at) VALUES (0, 0, 'doyeon', "김도연", "대리", "doyeon1209@gmail.com", 0, "doyeon1209@gmail.com", now());
+        </insert>
+
+    <select id="getData" resultType="hashmap">
+        select * from `user`
+        where deleted_at is null and id = 1
+    </select>
+
+</mapper>

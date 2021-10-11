@@ -1,0 +1,13 @@
+POST localhost:8080/v1/user
+Content-Type: application/json
+
+{
+  "type":  0,
+  "userType": 0,
+  "userId" : "doyeon",
+  "name" : "도연",
+  "manager" :  "대리",
+  "email" : "doyeon@shallwead.com",
+  "invoiceEmail" :  "doyeon@shallwead.com",
+  "currencyType": 0
+}
