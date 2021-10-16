@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.adgile.repository.UserMapper">
-<!--    <insert id="create" parameterType="object">-->
-<!--        INSERT INTO user (type, user_type, user_id, name, manager, email, currency_type, invoice_email) VALUES (${type}, ${userType}, #{userId}, #{name}, #{manager}, #{email}, #{currencyType}, #{invoiceEmail});-->
-<!--    </insert>-->
-        <insert id="create" parameterType="object">
-            INSERT INTO user (type, user_type, user_id, name, manager, email, currency_type, invoice_email, created_at) VALUES (0, 0, 'doyeon', "김도연", "대리", "doyeon1209@gmail.com", 0, "doyeon1209@gmail.com", now());
-        </insert>
 
     <select id="getData" resultType="com.adgile.domain.User" parameterType="Integer">
         SELECT *
@@ -20,5 +14,32 @@
         FROM `user`
         WHERE deleted_at IS NULL
     </select>
+
+    <insert id="create" parameterType="object">
+        INSERT INTO user (type, user_type, user_id, name, manager, email, currency_type, invoice_email, created_at)
+        VALUES
+            (${type}, ${userType}, #{userId}, #{name}, #{manager}, #{email}, ${currencyType}, #{invoiceEmail}, now());
+    </insert>
+
+    <update id="update" parameterType="map">
+        UPDATE `user`
+        SET type          = ${request.type},
+            user_type     = ${request.userType},
+            user_id       = #{request.userId},
+            name          = #{request.name},
+            manager       = #{request.manager},
+            email         = #{request.email},
+            currency_type = ${request.currencyType},
+            invoice_email = #{request.invoiceEmail},
+            updated_at    = now()
+        WHERE deleted_at IS NULL
+          AND id = ${id}
+    </update>
+
+    <update id="delete" parameterType="integer">
+        UPDATE user SET deleted_at = now()
+        WHERE deleted_at is null
+            AND id = ${id}
+    </update>
 
 </mapper>

@@ -25,24 +25,23 @@ public class UserService {
 
     public UserInfoResponse getData(Long id) {
         User user =  userMapper.getData(id);
-
-        System.out.println("---------- user ");
-        System.out.println(user);
-        System.out.println("---------- // user ");
-
         return UserInfoResponse.of(user);
     }
 
     public void create(UserRequestDto.create request) {
-        System.out.println("--------- service >> ");
         userMapper.create(request);
     }
 
-    public void update() {
+    public void update(UserRequestDto.update request, Long id) {
 
+        System.out.println("------- service update");
+        System.out.println(request);
+        System.out.println("------- // service update");
+        System.out.println("------- // service id :: " + id);
+        userMapper.update(request, id);
     }
 
-    public void delete() {
-
+    public void delete(Long id) {
+        userMapper.delete(id);
     }
 }

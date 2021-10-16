@@ -14,4 +14,16 @@ public class UserRequestDto {
         private String invoiceEmail;
         private Integer currencyType;
     }
+
+    @Data
+    public static class update {
+        private Integer type;
+        private Integer userType;
+        private String userId;
+        private String name;
+        private String manager;
+        private String email;
+        private String invoiceEmail;
+        private Integer currencyType;
+    }
 }
