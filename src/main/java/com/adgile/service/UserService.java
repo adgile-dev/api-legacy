@@ -33,11 +33,6 @@ public class UserService {
     }
 
     public void update(UserRequestDto.update request, Long id) {
-
-        System.out.println("------- service update");
-        System.out.println(request);
-        System.out.println("------- // service update");
-        System.out.println("------- // service id :: " + id);
         userMapper.update(request, id);
     }
 

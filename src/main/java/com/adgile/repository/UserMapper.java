@@ -17,7 +17,6 @@ public interface UserMapper {
 
     int create(UserRequestDto.create request);
 
-//    int update(UserRequestDto.update request, Long id);
     int update(@Param("request") UserRequestDto.update request, @Param("id") Long id);
 
     int delete(Long id);
