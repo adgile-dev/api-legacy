@@ -8,9 +8,17 @@
             INSERT INTO user (type, user_type, user_id, name, manager, email, currency_type, invoice_email, created_at) VALUES (0, 0, 'doyeon', "김도연", "대리", "doyeon1209@gmail.com", 0, "doyeon1209@gmail.com", now());
         </insert>
 
-    <select id="getData" resultType="hashmap">
-        select * from `user`
-        where deleted_at is null and id = 1
+    <select id="getData" resultType="com.adgile.domain.User" parameterType="Integer">
+        SELECT *
+        FROM `user`
+        WHERE deleted_at IS NULL
+         AND id = ${id}
+    </select>
+
+    <select id="getList" resultType="com.adgile.domain.User">
+        SELECT *
+        FROM `user`
+        WHERE deleted_at IS NULL
     </select>
 
 </mapper>

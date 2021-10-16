@@ -1,6 +1,9 @@
 package com.adgile.dto.response;
 
+import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  *
@@ -29,6 +32,10 @@ public class UserInfoResponse {
     private String email;
     private String currency_type;
     private String invoice_email;
-    private  created_at;
-    private String updated_at;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
+
+
+    @Builder
+    public
 }
