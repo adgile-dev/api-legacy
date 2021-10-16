@@ -2,6 +2,7 @@ package com.adgile.controller;
 
 import com.adgile.ApiResponse;
 import com.adgile.dto.request.UserRequestDto;
+import com.adgile.dto.response.BooleanResponse;
 import com.adgile.dto.response.UserInfoResponse;
 import com.adgile.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,11 @@ public class UserController {
     @GetMapping("{id}")
     public ApiResponse<UserInfoResponse> getData(@PathVariable("id") Long id) {
         return ApiResponse.success(userService.getData(id));
+    }
+
+    @GetMapping("check/{userId}")
+    public ApiResponse<BooleanResponse> getCheckById(@PathVariable("userId") String userId) {
+        return ApiResponse.success(userService.getCheckById(userId));
     }
 
     // 생성

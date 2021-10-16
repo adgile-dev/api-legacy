@@ -8,17 +8,18 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApiResponse<T> {
 
+    private Integer code;
+    private String message;
     private T data;
-    private String result;
 
-    public static final ApiResponse<String> OK = new ApiResponse<>("", "00000");
+    public static final ApiResponse<String> OK = new ApiResponse<>(200, "OK", null);
 
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(data, "00000");
+        return new ApiResponse<>(200, null, data);
     }
 
-    public static ApiResponse<Object> error(String result) {
-        return new ApiResponse<>("", result);
+    public static ApiResponse<Object> error(Integer code, String message) {
+        return new ApiResponse<>(code, message, null);
     }
 
 }

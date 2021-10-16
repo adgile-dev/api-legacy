@@ -6,7 +6,15 @@
         SELECT *
         FROM `user`
         WHERE deleted_at IS NULL
-         AND id = ${id}
+        <if test="id != null"> AND id = ${id} </if>
+        <if test="type != null"> AND type = ${type} </if>
+        <if test="userType != null"> AND user_type = ${userType} </if>
+        <if test="userId != null"> AND user_id = #{userId} </if>
+        <if test="name != null"> AND name = #{name} </if>
+        <if test="manager != null"> AND manager = #{manager} </if>
+        <if test="email != null"> AND email = #{email} </if>
+        <if test="currencyType != null"> AND currency_type = ${currencyType} </if>
+        <if test="invoiceEmail != null"> AND invoice_email = #{invoiceEmail} </if>
     </select>
 
     <select id="getList" resultType="com.adgile.domain.User">

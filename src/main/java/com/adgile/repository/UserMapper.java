@@ -6,14 +6,16 @@ import com.adgile.dto.response.UserInfoResponse;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface UserMapper {
 
     List<UserInfoResponse> getList();
 
-    User getData(Long id);
+    Optional<User> getData(HashMap<String, Object> where);
 
     int create(UserRequestDto.create request);
 
