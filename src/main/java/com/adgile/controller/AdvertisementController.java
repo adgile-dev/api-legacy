@@ -2,6 +2,7 @@ package com.adgile.controller;
 
 import com.adgile.Response;
 import com.adgile.dto.request.AdvertisementRequestDto;
+import com.adgile.service.AdvertisementService;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AdvertisementController {
 
-//    private final AdvertisementService advertisementService;
+    private final AdvertisementService advertisementService;
 
     @GetMapping("")
     public Response<String> getList() {
@@ -28,6 +29,7 @@ public class AdvertisementController {
     // 생성
     @PostMapping("")
     public Response<String> create(@RequestBody AdvertisementRequestDto.create request) {
+
         return Response.OK;
     }
 
