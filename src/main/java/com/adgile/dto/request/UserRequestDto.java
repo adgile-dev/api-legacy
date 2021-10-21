@@ -26,4 +26,10 @@ public class UserRequestDto {
         private String invoiceEmail;
         private Integer currencyType;
     }
+
+    @Data
+    public static class list {
+        private String userId;
+        private String userType;
+    }
 }

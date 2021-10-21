@@ -22,8 +22,8 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public List<UserInfoResponse> getList() {
-        return userMapper.getList();
+    public List<UserInfoResponse> getList(HashMap<String, Object> where) {
+        return userMapper.getList(where);
     }
 
     public UserInfoResponse getData(Long id) {

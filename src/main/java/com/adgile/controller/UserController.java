@@ -1,6 +1,6 @@
 package com.adgile.controller;
 
-import com.adgile.ApiResponse;
+import com.adgile.Response;
 import com.adgile.dto.request.UserRequestDto;
 import com.adgile.dto.response.BooleanResponse;
 import com.adgile.dto.response.UserInfoResponse;
@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -21,39 +22,43 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("")
-    public ApiResponse<List<UserInfoResponse>> getList() {
-        var test = userService.getList();
-        return ApiResponse.success(test);
+    public Response<List<UserInfoResponse>> getList(UserRequestDto.list request) {
+        HashMap<String, Object> where = new HashMap<>();
+
+        where.put("userId", request.getUserId());
+        where.put("userType", request.getUserType());
+
+        return Response.success(userService.getList(where));
     }
 
     @GetMapping("{id}")
-    public ApiResponse<UserInfoResponse> getData(@PathVariable("id") Long id) {
-        return ApiResponse.success(userService.getData(id));
+    public Response<UserInfoResponse> getData(@PathVariable("id") Long id) {
+        return Response.success(userService.getData(id));
     }
 
     @GetMapping("check/{userId}")
-    public ApiResponse<BooleanResponse> getCheckById(@PathVariable("userId") String userId) {
-        return ApiResponse.success(userService.getCheckById(userId));
+    public Response<BooleanResponse> getCheckById(@PathVariable("userId") String userId) {
+        return Response.success(userService.getCheckById(userId));
     }
 
     // 생성
     @PostMapping("")
-    public ApiResponse<String> create(@RequestBody UserRequestDto.create request) {
+    public Response<String> create(@RequestBody UserRequestDto.create request) {
         userService.create(request);
-        return ApiResponse.OK;
+        return Response.OK;
     }
 
     // 수정
     @PutMapping("{id}")
-    public ApiResponse<String> update(@PathVariable Long id, @RequestBody UserRequestDto.update request) {
+    public Response<String> update(@PathVariable Long id, @RequestBody UserRequestDto.update request) {
         userService.update(request, id);
-        return ApiResponse.OK;
+        return Response.OK;
     }
 
     // 삭제
     @DeleteMapping("{id}")
-    public ApiResponse<String> delete(@PathVariable Long id) {
+    public Response<String> delete(@PathVariable Long id) {
         userService.delete(id);
-        return ApiResponse.OK;
+        return Response.OK;
     }
 }

@@ -13,7 +13,7 @@ import java.util.Optional;
 @Mapper
 public interface UserMapper {
 
-    List<UserInfoResponse> getList();
+    List<UserInfoResponse> getList(HashMap<String, Object> where);
 
     Optional<User> getData(HashMap<String, Object> where);
 
