@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adgile.repository.AdvertisementMapper">
+
+    <select id="getDataOfBudget" resultType="com.adgile.dto.response.AdvertisementInfoResponse">
+        SELECT *
+        FROM advertisement a
+        LEFT JOIN budget b ON a.id = b.advertisement_id and b.deleted_at is null
+        WHERE a.id = ${id}
+            AND a.deleted_at is null
+    </select>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id"  parameterType="object">
+        INSERT INTO advertisement (user_id, os_type, type, start_date, end_date, download_link, created_at)
+        values (
+            ${userId}, ${osType}, ${type}, #{startDate}, #{endDate}, #{downloadLink}, now()
+               )
+    </insert>
+
+    <update id="delete" parameterType="Long">
+        UPDATE advertisement
+        SET deleted_at = now()
+        WHERE id = ${id}
+    </update>
+</mapper>

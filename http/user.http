@@ -3,13 +3,12 @@ GET localhost:8080/v1/user/3
 Content-Type: application/json
 
 ### 리스트
-GET localhost:8080/v1/user?user_id=doyeon
+GET http://localhost:8080/v1/user
 Content-Type: application/json
 
 ### id check
 GET localhost:8080/v1/user/check/doyeon121
 Content-Type: application/json
-
 
 ### 생성
 POST localhost:8080/v1/user

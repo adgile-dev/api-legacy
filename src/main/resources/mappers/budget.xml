@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adgile.repository.BudgetMapper">
+
+    <insert id="create" parameterType="object">
+        INSERT INTO budget (advertisement_id, total, is_total_limit, daily, is_daily_limit, price_type, execution_price, execution_price_per_dollar,
+                            daily_cap, is_daily_cap_limit, total_daily_cap, is_total_daily_cap_limit)
+        VALUES (
+                   ${id}, ${total}, ${isTotalLimit}, ${daily}, ${isDailyLimit},
+                   ${priceType}, ${executionPrice}, ${executionPricePerDollar},
+                   ${dailyCap}, ${isDailyCapLimit}, ${totalDailyCap}, ${isTotalDailyCapLimit}
+               )
+    </insert>
+
+    <update id="delete" parameterType="Long">
+        UPDATE budget SET
+        deleted_at = now()
+        WHERE advertisement_id = ${id}
+    </update>
+</mapper>
