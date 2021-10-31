@@ -2,7 +2,6 @@ package com.adgile.error;
 
 import lombok.ToString;
 
-@ToString
 public class ErrorResponse {
 
     private String message;

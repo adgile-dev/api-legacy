@@ -1,5 +1,6 @@
 package com.adgile.controller;
 
+import com.adgile.Response;
 import com.adgile.error.BusinessException;
 import com.adgile.error.ErrorCode;
 import com.adgile.error.ErrorResponse;
@@ -19,8 +20,20 @@ public class ExceptionController {
 
     // 비즈니스 로직 관련 예외처리 클래스
 
+//    @ExceptionHandler(BusinessException.class)
+//    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
+//        final ErrorCode errorCode = e.getErrorCode();
+//        final ErrorResponse errorResponse = ErrorResponse.of(errorCode);
+//
+//        logger.error("BusinessException 발생");
+//
+//        // TODO: error Response code & message 변경 해야함
+//
+//        return new ResponseEntity<>(errorResponse, HttpStatus.OK);
+//    }
+
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException e) {
+    public Response<Object> handleBusinessException(BusinessException e) {
         final ErrorCode errorCode = e.getErrorCode();
         final ErrorResponse errorResponse = ErrorResponse.of(errorCode);
 
@@ -28,6 +41,6 @@ public class ExceptionController {
 
         // TODO: error Response code & message 변경 해야함
 
-        return new ResponseEntity<>(errorResponse, HttpStatus.OK);
+        return Response.error(errorCode.getCode(), errorCode.getMessage());
     }
 }
