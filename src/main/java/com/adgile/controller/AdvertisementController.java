@@ -2,13 +2,17 @@ package com.adgile.controller;
 
 import com.adgile.Response;
 import com.adgile.dto.request.AdvertisementRequestDto;
+import com.adgile.dto.request.BudgetRequestDto;
 import com.adgile.dto.response.AdvertisementInfoResponse;
 import com.adgile.service.AdvertisementService;
+import com.adgile.service.BudgetService;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
-@Setter
+import javax.validation.Valid;
+import java.util.List;
+
+
 @RestController
 @RequestMapping("v1/advertisement")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -16,16 +20,16 @@ import org.springframework.web.bind.annotation.*;
 public class AdvertisementController {
 
     private final AdvertisementService advertisementService;
+    private final BudgetService budgetService;
 
     @GetMapping("")
-    public Response<String> getList() {
-        return Response.OK;
+    public Response<List<AdvertisementInfoResponse>> getList() {
+        return Response.success(advertisementService.getList());
     }
 
     @GetMapping("{id}")
     public Response<AdvertisementInfoResponse> getData(@PathVariable Long id) {
-        var test = advertisementService.getDataOfBudget(id);
-        return Response.success(test);
+        return Response.success(advertisementService.getDataOfBudget(id));
     }
 
     // 생성
@@ -34,6 +38,13 @@ public class AdvertisementController {
         advertisementService.create(request);
         return Response.OK;
     }
+
+    @PutMapping("{id}")
+    public Response<String> update(@RequestBody @Valid AdvertisementRequestDto.update request) {
+        advertisementService.update(request);
+        return Response.OK;
+    }
+
 
     // 삭제
     @DeleteMapping("{id}")

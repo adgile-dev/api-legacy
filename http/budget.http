@@ -1,0 +1,18 @@
+### 수정
+PUT localhost:8080/v1/budget/1
+Content-Type: application/json
+
+{
+  "id": 3,
+  "total": 1111,
+  "is_total_limit": true,
+  "daily": 100,
+  "is_daily_limit": true,
+  "price_type": 0,
+  "execution_price": 1000,
+  "execution_price_per_dollar": 1,
+  "daily_cap": 20,
+  "is_daily_cap_limit": true,
+  "total_daily_cap": 200,
+  "is_total_daily_cap_limit": false
+}

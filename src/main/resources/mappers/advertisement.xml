@@ -2,12 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.adgile.repository.AdvertisementMapper">
 
-    <select id="getDataOfBudget" resultType="com.adgile.dto.response.AdvertisementInfoResponse">
-        SELECT *
+    <resultMap id="AdvertisementInfoResponse" type="com.adgile.dto.response.AdvertisementInfoResponse">
+        <id property="id" column="advertisementId" />
+        <result property="userId" column="user_id" />
+        <result property="osType" column="os_type" />
+        <result property="type" column="type" />
+        <result property="startDate" column="start_date" />
+        <result property="endDate" column="end_date" />
+        <result property="downloadLink" column="download_link" />
+        <association property="budget" column="budget" javaType="com.adgile.dto.response.BudgetInfoResponse" resultMap="budgetInfo"/>
+    </resultMap>
+
+    <resultMap id="budgetInfo" type="com.adgile.dto.response.BudgetInfoResponse">
+        <id property="id" column="budgetId" />
+        <result property="total" column="total" />
+        <result property="isTotalLimit" column="is_total_limit" />
+        <result property="daily" column="daily" />
+        <result property="isDailyLimit" column="is_daily_limit" />
+        <result property="priceType" column="price_type" />
+        <result property="executionPrice" column="execution_price" />
+        <result property="executionPricePerDollar" column="execution_price_per_dollar" />
+        <result property="dailyCap" column="daily_cap" />
+        <result property="isDailyCapLimit" column="is_daily_cap_limit" />
+        <result property="totalDailyCap" column="total_daily_cap" />
+        <result property="isTotalDailyCapLimit" column="is_total_daily_cap_limit" />
+    </resultMap>
+
+    <select id="getDataOfBudget" resultMap="AdvertisementInfoResponse">
+        SELECT *, a.id as advertisementId, b.id as budgetId
         FROM advertisement a
         LEFT JOIN budget b ON a.id = b.advertisement_id and b.deleted_at is null
         WHERE a.id = ${id}
             AND a.deleted_at is null
+    </select>
+
+    <select id="getList" resultMap="AdvertisementInfoResponse">
+        SELECT *, a.id as advertisementId, b.id as budgetId
+        FROM advertisement a
+                 LEFT JOIN budget b ON a.id = b.advertisement_id and b.deleted_at is null
+        WHERE a.deleted_at is null
     </select>
 
     <insert id="create" useGeneratedKeys="true" keyProperty="id"  parameterType="object">
@@ -16,6 +49,19 @@
             ${userId}, ${osType}, ${type}, #{startDate}, #{endDate}, #{downloadLink}, now()
                )
     </insert>
+
+    <update id="update" parameterType="com.adgile.dto.request.AdvertisementRequestDto$update">
+        UPDATE advertisement SET
+             user_id       = ${userId},
+             os_type       = ${osType},
+             type          = ${type},
+             start_date    = #{startDate},
+             end_date      = #{endDate},
+             download_link = #{downloadLink},
+             updated_at    = now()
+        WHERE deleted_at is null
+            and id = ${id}
+    </update>
 
     <update id="delete" parameterType="Long">
         UPDATE advertisement

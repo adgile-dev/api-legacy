@@ -2,13 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.adgile.repository.BudgetMapper">
 
+    <select id="getData" parameterType="hashmap" resultType="com.adgile.domain.Budget">
+        SELECT *
+        FROM budget
+        WHERE
+            deleted_at IS NULL
+        <if test="id != null">AND id = ${id}</if>
+        <if test="total != null">AND total = ${total}</if>
+        <if test="isTotalLimit != null">AND is_total_limit = ${isTotalLimit}</if>
+        <if test="daily != null">AND daily = ${daily}</if>
+        <if test="isDailyLimit != null">AND is_daily_limit = ${isDailyLimit}</if>
+        <if test="priceType != null">AND price_type = ${priceType}</if>
+        <if test="executionPrice != null">AND execution_price = ${executionPrice}</if>
+        <if test="dailyCap != null">AND daily_cap = ${dailyCap}</if>
+        <if test="isDailyCapLimit != null">AND is_daily_cap_limit = ${isDailyCapLimit}</if>
+        <if test="totalDailyCap != null">AND total_daily_cap = ${totalDailyCap}</if>
+        <if test="isTotalDailyCapLimit != null">AND is_total_daily_cap_limit = ${isTotalDailyCapLimit}</if>
+    </select>
+
+    <update id="update" parameterType="hashmap">
+        update budget set
+            total = ${total},
+            is_total_limit = ${isTotalLimit},
+            daily = ${daily},
+            is_daily_limit = ${isDailyLimit},
+            price_type = ${priceType},
+            execution_price = ${executionPrice},
+            daily_cap = ${dailyCap},
+            is_daily_cap_limit = ${isDailyCapLimit},
+            total_daily_cap = ${totalDailyCap},
+            is_total_daily_cap_limit = ${isTotalDailyCapLimit},
+            updated_at = now()
+        where id = ${id}
+          AND deleted_at is null
+    </update>
+
     <insert id="create" parameterType="object">
         INSERT INTO budget (advertisement_id, total, is_total_limit, daily, is_daily_limit, price_type, execution_price, execution_price_per_dollar,
-                            daily_cap, is_daily_cap_limit, total_daily_cap, is_total_daily_cap_limit)
+                            daily_cap, is_daily_cap_limit, total_daily_cap, is_total_daily_cap_limit, created_at)
         VALUES (
                    ${id}, ${total}, ${isTotalLimit}, ${daily}, ${isDailyLimit},
                    ${priceType}, ${executionPrice}, ${executionPricePerDollar},
-                   ${dailyCap}, ${isDailyCapLimit}, ${totalDailyCap}, ${isTotalDailyCapLimit}
+                   ${dailyCap}, ${isDailyCapLimit}, ${totalDailyCap}, ${isTotalDailyCapLimit}, now()
                )
     </insert>
 

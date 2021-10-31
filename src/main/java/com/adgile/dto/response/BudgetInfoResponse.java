@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BudgetInfoResponse {
 
+    private Long id;
+
     private Integer total;
     private Boolean isTotalLimit;
     private Integer daily;
@@ -26,10 +28,11 @@ public class BudgetInfoResponse {
     private Boolean isTotalDailyCapLimit;
 
     @Builder
-    public BudgetInfoResponse(Integer total, Boolean isTotalLimit, Integer daily,
+    public BudgetInfoResponse(Long id, Integer total, Boolean isTotalLimit, Integer daily,
                               Boolean isDailyLimit, Integer priceType, Integer executionPrice,
                               Integer executionPricePerDollar, Integer dailyCap, Boolean isDailyCapLimit,
                               Integer totalDailyCap, Boolean isTotalDailyCapLimit) {
+        this.id = id;
         this.total = total;
         this.isTotalLimit = isTotalLimit;
         this.daily = daily;

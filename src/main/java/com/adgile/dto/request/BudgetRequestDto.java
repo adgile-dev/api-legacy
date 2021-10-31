@@ -7,10 +7,12 @@ import javax.validation.constraints.NotNull;
 public class BudgetRequestDto {
 
     @Data
-    public static class create {
+    public static class update {
+        // ㅇㅖ산 관련
 
         @NotNull
-        private Long advertisementId;
+        private Long id;
+
         @NotNull
         private Integer total;
         @NotNull
@@ -25,10 +27,6 @@ public class BudgetRequestDto {
 
         @NotNull
         private Integer executionPrice;
-
-        @NotNull
-        private Integer executionPricePerDollar;
-
         @NotNull
         private Integer dailyCap;
 
