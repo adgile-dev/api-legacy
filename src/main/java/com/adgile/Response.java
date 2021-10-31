@@ -18,7 +18,7 @@ public class Response<T> {
         return new Response<>(200, null, data);
     }
 
-    public static Response<Object> error(Integer code, String message) {
+    public static Response<Object> error (Integer code, String message) {
         return new Response<>(code, message, null);
     }
 
