@@ -1,5 +1,5 @@
 ### 조회
-GET localhost:8080/v1/user/3
+GET http://localhost:8080/v1/user/3
 Content-Type: application/json
 
 ### 리스트

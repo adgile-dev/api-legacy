@@ -1,0 +1,40 @@
+### 리스트
+GET http://localhost:8080/v1/media
+Content-Type: application/json
+
+### 조회
+GET http://localhost:8080/v1/media/2
+Content-Type: application/json
+
+
+### 생성
+POST http://localhost:8080/v1/media
+Content-Type: application/json
+
+{
+  "user_id" : 1,
+  "name" : "메이플 스토리",
+  "manager" :  "김도연",
+  "email" : "manager@nexon.com",
+  "click_url" :  "test@test.com/?test.html",
+  "install_postback" : "test.html/?test=1234",
+  "event_postback" :  "testttt.html/?test=1234"
+}
+
+### 수정
+PUT http://localhost:8080/v1/media/2
+Content-Type: application/json
+
+{
+  "user_id" : 1,
+  "name" : "메이플",
+  "manager" :  "김도연",
+  "email" : "manager@nexon.com",
+  "click_url" :  "test@test.com/?test.html",
+  "install_postback" : "test.html/?test=1234",
+  "event_postback" :  "testttt.html/?test=1234"
+}
+
+### 삭제
+DELETE http://localhost:8080/v1/media/1
+Content-Type: application/json

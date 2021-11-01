@@ -4,7 +4,8 @@ public enum ErrorCode {
 
     // 공통
     BUDGET_NOT_EXIST(500, "존재하지 않는 예산입니다."),
-    USER_NOT_EXIST(500, "존재하지 않는 회원입니다");
+    MEDIA_NOT_EXIST(500, "존재하지 않는 매체입니다."),
+    USER_NOT_EXIST(500, "존재하지 않는 회원입니다.");
 
     private final Integer code;
     private final String message;

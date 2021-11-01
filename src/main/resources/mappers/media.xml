@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adgile.repository.MediaMapper">
+
+    <select id="getData" resultType="com.adgile.domain.Media">
+        select *
+        from media
+        where deleted_at is null
+        <if test="id != null"> AND id = ${id} </if>
+    </select>
+
+    <select id="getList" parameterType="object" resultType="com.adgile.domain.Media">
+        select *
+        from media
+        where deleted_at is null
+        <if test="id != null"> and id = ${id}</if>
+    </select>
+
+    <insert id="create" parameterType="object">
+        INSERT INTO media (user_id, name, manager, email, click_url, install_postback, event_postback, created_at)
+        VALUES
+        (${userId}, #{name}, #{manager}, #{email}, #{clickUrl}, #{installPostback}, #{eventPostback}, now())
+    </insert>
+
+    <update id="update">
+        update media
+        set user_id          = ${userId},
+            name             = #{name},
+            manager          = #{manager},
+            email            = #{email},
+            click_url        = #{clickUrl},
+            install_postback = #{installPostback},
+            event_postback   = #{eventPostback},
+            updated_at       = now()
+        where id = ${id}
+          and deleted_at is null
+    </update>
+
+    <update id="delete">
+        update media
+        set deleted_at = now()
+        WHERE id = ${id}
+          and deleted_at is null
+    </update>
+</mapper>
