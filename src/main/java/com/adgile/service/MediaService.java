@@ -34,6 +34,8 @@ public class MediaService {
         HashMap<String, Object> where = new HashMap<>();
         List<MediaInfoResponse> media = mediaMapper.getList(where);
 
+        System.out.println("----------");
+
         return media;
     }
 
